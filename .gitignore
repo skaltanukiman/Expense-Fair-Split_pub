@@ -1,0 +1,9 @@
+bin/
+obj/
+*.userprefs
+*.csproj.user
+.vscode/
+.DS_Store
+.vs/
+*.suo
+*.user

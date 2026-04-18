@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Expense_Fair_Split.Views.Archive.ArchivePreparationPage"
+             Shell.BackgroundColor="White">
+
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout
+                Padding="30,0,30,0"
+                Spacing="0">
+
+                <Label 
+                    Text="出力条件"
+                    HorizontalOptions="Start"
+                    Style="{StaticResource SmallLabelSize}" />
+
+                <Grid Margin="0,40,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="1.2*"/>
+                        <ColumnDefinition Width="4*" />
+                    </Grid.ColumnDefinitions>
+
+                    <VerticalStackLayout Grid.Column="0">
+
+                        <Label 
+                            Text="年"
+                            HorizontalOptions="Start"
+                            Style="{StaticResource SmallLabelSize}" />
+
+                        <Picker
+                            ItemsSource="{Binding TargetYearList}"
+                            SelectedItem="{Binding YearPickSelectedItem}"
+                            SelectedIndex="{Binding YearPickSelectedIndex}"
+                            FontSize="18" />
+
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Grid.Column="2">
+
+                        <Label 
+                            Text="月"
+                            HorizontalOptions="Start"
+                            Style="{StaticResource SmallLabelSize}" />
+
+                        <Picker
+                            ItemsSource="{Binding AvailableMonths}"
+                            SelectedItem="{Binding MonthPickSelectedItem}"
+                            SelectedIndex="{Binding MonthPickSelectedIndex}"
+                            FontSize="18" />
+
+                    </VerticalStackLayout>
+
+                </Grid>
+
+                <Border
+                    Stroke="Black"
+                    StrokeThickness="1"
+                    HorizontalOptions="Center"
+                    StrokeShape="Rectangle"
+                    Margin="0,15,0,0">
+
+                    <Grid HorizontalOptions="Center" Padding="10,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label
+                            Grid.Column="0"
+                            Text="削除済みを含む"
+                            VerticalOptions="Center"
+                            Style="{StaticResource SmallLabelSize}"/>
+
+                        <CheckBox IsChecked="{Binding IncludingDeletedData}" Grid.Column="1" VerticalOptions="Center" />
+
+                    </Grid>
+                </Border>
+
+                <Button
+                    Text="出力"
+                    Style="{StaticResource CommonBtn}"
+                    IsEnabled="{Binding OutputButtonEnabled}"
+                    HorizontalOptions="Center"
+                    Clicked="GoToArchivePage"
+                    Margin="0,80,0,0"
+                    />
+
+            </VerticalStackLayout>
+        </ScrollView>
+        
+        <!--ローディングオーバーレイ-->
+        <Grid
+            BackgroundColor="#80000000"
+            IsVisible="{Binding ShowLoadingOverlay}"
+            VerticalOptions="FillAndExpand"
+            HorizontalOptions="FillAndExpand"
+            ZIndex="100">
+
+            <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                <ActivityIndicator IsRunning="{Binding ShowLoadingOverlay}" IsVisible="{Binding ShowLoadingOverlay}" WidthRequest="50" HeightRequest="50" />
+                <Label Text="処理中です…" TextColor="White" HorizontalOptions="Center" Opacity="0.8" />
+            </StackLayout>
+        </Grid>
+        
+    </Grid>
+</ContentPage>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Expense_Fair_Split.Views.BillingDataDetailPage"
+             Shell.BackgroundColor="White">
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0,30,50"
+            Spacing="0">
+            <Label 
+                Text="詳細情報"
+                FontSize="24"
+                HorizontalOptions="Center"
+                Margin="0,0,0,40" />
+
+            <Label
+                Text="{Binding ProcessMsg}"
+                FontSize="14"
+                TextColor="Red"
+                IsVisible="{Binding ShowProcessMsg}"
+                Margin="0,0,0,20"
+                />
+
+            <Label
+                Text="{Binding ErrMsg}"
+                FontSize="14"
+                TextColor="Red"
+                IsVisible="{Binding ShowErrMsg}"
+                Margin="0,0,0,20"
+                />
+
+            <!--データ表示-->
+            <Grid Margin="0,0,0,45">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.3*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                
+                <!--左部-->
+                <Label
+                    Text="請求発行日付"
+                    FontSize="18"
+                    Grid.Row="0"/>
+                <Label
+                    Text="勘定"
+                    FontSize="18"
+                    Grid.Row="1" />
+                <Label
+                    Text="請求者"
+                    FontSize="18"
+                    Grid.Row="2" />
+                <Label
+                    Text="受領者"
+                    FontSize="18"
+                    Grid.Row="3"/>
+                <Label
+                    Text="案分比率"
+                    FontSize="18"
+                    Grid.Row="4" />
+                <Label
+                    Text="総金額"
+                    FontSize="18"
+                    Grid.Row="5" />
+                <Label
+                    Text="請求金額"
+                    FontSize="18"
+                    Grid.Row="6" />
+                <Label
+                    Text="備考"
+                    FontSize="18"
+                    Grid.Row="7" />
+                <Label
+                    Text="状態"
+                    FontSize="18"
+                    Grid.Row="8" />
+                
+                <!--右部-->
+                <Label
+                    Text="{Binding BillingDate, StringFormat='{}{0:yyyy/MM/dd}'}"
+                    FontSize="18"
+                    Grid.Row="0"
+                    Grid.Column="1"/>
+                <Label
+                    Text="{Binding AccountName}"
+                    FontSize="18"
+                    Grid.Row="1"
+                    Grid.Column="1"/>
+                <Label
+                    Text="{Binding FromUserName}"
+                    FontSize="18"
+                    Grid.Row="2"
+                    Grid.Column="1"/>
+                <Label
+                    Text="{Binding ToUserName}"
+                    FontSize="18"
+                    Grid.Row="3"
+                    Grid.Column="1"/>
+                <Label
+                    Text="{Binding RatioText}"
+                    FontSize="18"
+                    Grid.Row="4"
+                    Grid.Column="1"/>
+
+                <HorizontalStackLayout
+                    Grid.Row="5"
+                    Grid.Column="1">
+                    
+                    <Label
+                        Text="{Binding TotalAmount, StringFormat='{}{0:N0}'}"
+                        FontSize="18" />
+
+                    <Label
+                        Text="(+)"
+                        FontSize="18"
+                        Padding="5,0,5,0" >
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding RenderSplitAmountsCommand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                        
+                </HorizontalStackLayout>
+                
+                <Label
+                    Text="{Binding AmountBilled, StringFormat='{}{0:N0}'}"
+                    FontSize="18"
+                    Grid.Row="6"
+                    Grid.Column="1"/>
+                <Label
+                    Text="{Binding Note}"
+                    FontSize="18"
+                    Grid.Row="7"
+                    Grid.Column="1"/>
+                <Label
+                    Text="{Binding StatusDisplayViewStr}"
+                    FontSize="18"
+                    Grid.Row="8"
+                    Grid.Column="1"/>
+            </Grid>
+            <StackLayout IsVisible="{Binding IsApprovalPending}">
+                <Label
+                    Text="承認依頼がきています。"
+                    FontSize="18"
+                    FontAttributes="Bold"
+                    TextColor="Red"
+                    HorizontalOptions="Center"
+                    Margin="0,0,0,20"/>
+
+                <!--ボタン-->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100*"/>
+                        <ColumnDefinition Width="100*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button
+                        Text="承認" 
+                        Command="{Binding ApproveActionCommand}"
+                        HorizontalOptions="Center"
+                        Padding="40,15"
+                        FontSize="16"
+                        BackgroundColor="MediumSeaGreen"
+                        Grid.Row="0"
+                        Grid.Column="0"/>
+                    <Button
+                        Text="否認" 
+                        Command="{Binding DenyActionCommand}"
+                        HorizontalOptions="Center"
+                        Padding="40,15"
+                        FontSize="16"
+                        BackgroundColor="Red"
+                        Grid.Column="1"/>
+                </Grid>
+            </StackLayout>
+
+            <StackLayout IsVisible="{Binding IsAwaitingPayment}">
+                <Label
+                    Text="支払い完了後、支払い完了ボタンを押して下さい。"
+                    FontSize="15"
+                    FontAttributes="Bold"
+                    TextColor="Red"
+                    HorizontalOptions="Center"
+                    Margin="0,0,0,20"/>
+
+                <Button
+                    Text="支払い完了" 
+                    Command="{Binding SendPaymentCompleteCommand}"
+                    HorizontalOptions="Center"
+                    Padding="100,20"
+                    Margin="0,10,0,0"
+                    FontSize="16"
+                    Grid.Row="0"
+                    Grid.Column="0"/>
+            </StackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

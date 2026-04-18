@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Style x:Key="NormalLabelSize" TargetType="Label">
+        <Setter Property="FontSize" Value="20"/>
+    </Style>
+
+    <Style x:Key="SmallLabelSize" TargetType="Label">
+        <Setter Property="FontSize" Value="18"/>
+    </Style>
+
+    <Style x:Key="LargeTextSize" TargetType="Label">
+        <Setter Property="FontSize" Value="20"/>
+    </Style>
+
+    <Style x:Key="NormalTextSize" TargetType="Label">
+        <Setter Property="FontSize" Value="17"/>
+    </Style>
+
+    <Style x:Key="SmallTextSize" TargetType="Label">
+        <Setter Property="FontSize" Value="15"/>
+    </Style>
+
+    <Style x:Key="NormalPickerSize" TargetType="Picker">
+        <Setter Property="FontSize" Value="20"/>
+    </Style>
+
+    <Style x:Key="NormalEntrySize" TargetType="Entry">
+        <Setter Property="FontSize" Value="20"/>
+    </Style>
+
+    <Style x:Key="NormalEditorSize" TargetType="Editor">
+        <Setter Property="FontSize" Value="17"/>
+    </Style>
+
+    <Style x:Key="ErrMsgLabelNormal" TargetType="Label">
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="TextColor" Value="Red"/>
+    </Style>
+
+    <Style x:Key="CommonBtn" TargetType="Button">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="TextColor" Value="Black"/>
+        <Setter Property="CornerRadius" Value="3"/>
+        <Setter Property="BorderColor" Value="Black"/>
+        <Setter Property="BorderWidth" Value="1"/>
+        <Setter Property="BackgroundColor" Value="LimeGreen"/>
+        <Setter Property="Padding" Value="70,20"/>
+    </Style>
+
+</ResourceDictionary>

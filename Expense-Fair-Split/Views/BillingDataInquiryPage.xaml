@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Expense_Fair_Split.Views.BillingDataInquiryPage"
+             Title="請求データ照会">
+
+    <ScrollView Orientation="Both">
+        <VerticalStackLayout
+            Padding="20,20"
+            Spacing="0">
+            
+            <!--メッセージ領域(表示するものがない場合は場所を取らない)-->
+            <VerticalStackLayout
+                Margin="0,10,0,25"
+                IsVisible="{Binding IsMsgAreaVisible}">
+
+                <Label
+                    Text="{Binding InfoMsg}"
+                    IsVisible="{Binding ShowInfoMsg}"
+                    FontSize="15" />
+
+                <Label
+                    Text="{Binding ErrorMsg}"
+                    IsVisible="{Binding ShowErrorMsg}"
+                    FontSize="15"
+                    TextColor="Red" />
+
+                <Label
+                    Text="{Binding ProcessMsg}"
+                    IsVisible="{Binding ShowProcessMsg}"
+                    FontSize="15"
+                    TextColor="Red" />
+
+                <Label
+                    Text="{Binding ProcessMsg2}"
+                    IsVisible="{Binding ShowProcessMsg2}"
+                    FontSize="15"
+                    TextColor="Red" />
+
+            </VerticalStackLayout>
+            
+            
+            <Grid
+                Margin="0,0,0,10"
+                ColumnDefinitions="*">
+
+                <HorizontalStackLayout
+                    VerticalOptions="Center"
+                    HorizontalOptions="Start"
+                    Grid.Column="0">
+                    
+                    <Image
+                        Source="{StaticResource FilterIconImageSource}"
+                        WidthRequest="30"
+                        HeightRequest="26" />
+
+                    <Label
+                        Text="フィルター"
+                        FontSize="18"
+                        Margin="0,0,0,0" />
+
+                </HorizontalStackLayout>
+
+                <ImageButton
+                    Source="{StaticResource ArrowsRotateIconImageSource}"
+                    Command="{Binding RefreshDataCommand}"
+                    Margin="0,0,0,0"
+                    WidthRequest="30"
+                    HeightRequest="26"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Rotation="{Binding RotateTo}"
+                    Grid.Column="0" />
+
+            </Grid>
+            
+
+            <HorizontalStackLayout>
+                <Picker
+                    x:Name="Picker1"
+                    ItemsSource="{Binding Filter1}"
+                    SelectedItem="{Binding Filter1SelectedItem}"
+                    SelectedIndex="{Binding Filter1SelectedIndex}"
+                    ItemDisplayBinding="{Binding FilterName}"
+                    SelectedIndexChanged="Picker_SelectedIndexChanged"
+                    FontSize="20"
+                    WidthRequest="150"
+                    HorizontalOptions="Start"
+                    Margin="0,0,0,0" />
+
+                <Picker
+                    x:Name="Picker2"
+                    ItemsSource="{Binding Filter2}"
+                    SelectedItem="{Binding Filter2SelectedItem}"
+                    SelectedIndex="{Binding Filter2SelectedIndex}"
+                    ItemDisplayBinding="{Binding FilterName}"
+                    SelectedIndexChanged="Picker_SelectedIndexChanged"
+                    FontSize="20"
+                    WidthRequest="150"
+                    HorizontalOptions="Start"
+                    Margin="0,0,0,0" />
+
+                <ImageButton
+                    Source="{StaticResource CircleExclamationIconImageSource}"
+                    Clicked="CircleExclamation_Clicked"
+                    Margin="132,0,0,0"
+                    WidthRequest="30"
+                    HeightRequest="26" />
+
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout IsVisible="{Binding IsCalculated}" Margin="0,0,0,10">
+                
+                <HorizontalStackLayout Margin="0,0,10,0">
+                    <Label Text="総合計: " FontSize="18" FontAttributes="Bold" />
+                    <Label Text="￥" FontSize="18" FontAttributes="Bold" />
+                    <Label Text="{Binding CalcTotalAmount, StringFormat='{}{0:N0}'}" FontSize="20" FontAttributes="Bold" />
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout>
+                    <Label Text="請求額合計: " FontSize="18" FontAttributes="Bold" />
+                    <Label Text="￥" FontSize="18" FontAttributes="Bold" />
+                    <Label Text="{Binding CalcBillingAmount, StringFormat='{}{0:N0}'}" FontSize="20" FontAttributes="Bold" />
+                </HorizontalStackLayout>
+
+            </HorizontalStackLayout>
+            
+            
+
+            <!--見出し部分-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="65" />
+                    <ColumnDefinition Width="60" />
+                </Grid.ColumnDefinitions>
+
+                <Label
+                    Text="計算"
+                    FontAttributes="Bold"
+                    Grid.Column="0"/>
+                <Label Text="請求年月"
+                       FontAttributes="Bold"
+                       Grid.Column="1"/>
+                <Label Text="勘定"
+                       FontAttributes="Bold"
+                       Grid.Column="2"/>
+                <Label Text="請求者"
+                       FontAttributes="Bold"
+                       Grid.Column="3"/>
+                <Label Text="金額"
+                       FontAttributes="Bold"
+                       Grid.Column="4"/>
+                <Label Text="状態"
+                       FontAttributes="Bold"
+                       Grid.Column="5"/>
+                <Label Text="フェーズ"
+                       HorizontalTextAlignment="Center"
+                       FontAttributes="Bold"
+                       Grid.Column="6"/>
+            </Grid>
+            
+            <!--データ部分-->
+            <CollectionView ItemsSource="{Binding BillingDatas}"
+                            SelectionMode="Single"
+                            SelectionChanged="OnBillingDataDetail">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,0,0,0" BackgroundColor="{Binding StateColor}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition Width="65" />
+                                <ColumnDefinition Width="60" />
+                            </Grid.ColumnDefinitions>
+
+                            <CheckBox IsChecked="{Binding CalcTarget}" CheckedChanged="CheckBox_CheckedChanged" Scale="0.9" VerticalOptions="Center" HorizontalOptions="Center" TranslationX="-10" Grid.Column="0" />
+                            <Label Text="{Binding BillingDate, StringFormat='{}{0:yyyy/MM}'}" VerticalOptions="Center" Grid.Column="1" />
+                            <Label Text="{Binding AccountName}" Grid.Column="2" LineBreakMode="TailTruncation" VerticalOptions="Center" />
+                            <Label Text="{Binding FromUserName}" Grid.Column="3" LineBreakMode="TailTruncation" VerticalOptions="Center" />
+                            <Label Text="{Binding TotalAmount}" Grid.Column="4" LineBreakMode="TailTruncation" VerticalOptions="Center" />
+                            <Label Text="{Binding StatusDisplayViewStr}" Grid.Column="5" VerticalOptions="Center" />
+                            <Label Text="{Binding StatusCode}" Grid.Column="6" HorizontalTextAlignment="Center" VerticalOptions="Center" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+    </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

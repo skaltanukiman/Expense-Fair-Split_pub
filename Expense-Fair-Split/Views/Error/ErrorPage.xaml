@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Expense_Fair_Split.Views.Error.ErrorPage"
+             Shell.BackgroundColor="White">
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="20,250"
+            Spacing="0">
+
+            <Label 
+            Text="システムエラー"
+            FontSize="18"
+            TextColor="Red"
+            HorizontalOptions="Center"
+            Margin="0,0,0,40"/>
+
+            <Label 
+            Text="システム管理者に問い合わせてください"
+            FontSize="16"
+            TextColor="Black"
+            HorizontalOptions="Center"
+            Margin="0,0,0,20" />
+            
+            <!-- 参考情報ブロック -->
+            <VerticalStackLayout
+                Padding="10,5,40,5"
+                WidthRequest="200"
+                HorizontalOptions="Center"
+                BackgroundColor="LightGray"
+                IsVisible="{Binding ErrorInfoExists}">
+                
+                <Label
+                    Text="エラー情報"
+                    FontSize="14"
+                    TextColor="Black"/>
+
+                <HorizontalStackLayout>
+                    <Label
+                        Text="エラータイプ: "
+                        FontSize="14"
+                        TextColor="Black"/>
+                    <Label Text="{Binding ErrorType}"
+                           FontSize="14"
+                           TextColor="Black"/>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout>
+                    <Label
+                        Text="エラーコード: "
+                        TextColor="Black"
+                        FontSize="14" />
+                    <Label Text="{Binding ErrorCode}"
+                           FontSize="14"
+                           TextColor="Black" />
+                </HorizontalStackLayout>
+
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:localization="clr-namespace:Expense_Fair_Split.Localization"
+             x:Class="Expense_Fair_Split.MainPage"
+             Title="メインメニュー">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0,30,80"
+            Spacing="25">
+
+            <Image
+                Source="mainpage_hamster_money.png"
+                HeightRequest="185"
+                Aspect="AspectFit"
+                Margin="0,25,0,0"
+                SemanticProperties.Description="お金を咥えたハムスター" />
+
+            <Label
+                Text="{x:Static localization:XamlText.MainMenuText}"
+                FontSize="18"
+                HorizontalOptions="Center"
+                Margin="0,0,0,0"/>
+
+            <Button
+                Text="{x:Static localization:XamlText.BillingDataInput}" 
+                Clicked="OnBillingDataEntry"
+                HorizontalOptions="Fill"
+                Padding="0,20"
+                FontSize="16"/>
+            <Button
+                Text="{x:Static localization:XamlText.BillingDataInquiry}" 
+                Clicked="OnBillingDataInquiry"
+                HorizontalOptions="Fill"
+                Padding="0,20"
+                FontSize="16"/>
+            <Button
+                Text="{x:Static localization:XamlText.MasterEdit}" 
+                Clicked="OnMasterRegister"
+                HorizontalOptions="Fill"
+                Padding="0,20"
+                FontSize="16"/>
+            <Button
+                Text="{x:Static localization:XamlText.Other}" 
+                Clicked="OnOtherContents"
+                HorizontalOptions="Fill"
+                Padding="0,20"
+                FontSize="16"/>
+            <Button
+                Text="{x:Static localization:XamlText.SettingPage}" 
+                Clicked="OnSettingPage"
+                HorizontalOptions="Fill"
+                Padding="0,20"
+                FontSize="16"/>
+            
+            <!--お問い合わせページ-->
+            <Grid ColumnDefinitions="Auto,Auto"
+                  VerticalOptions="Center"
+                  HorizontalOptions="Center"
+                  x:Name="ContactForm">
+
+                <Image Grid.Column="0"
+                       Source="{StaticResource EnvelopeIconImageSource}"
+                       HeightRequest="24"
+                       WidthRequest="24"
+                       VerticalOptions="Center" />
+
+                <Label Grid.Column="1"
+                       Text="ご意見・ご要望はこちら"
+                       FontSize="18"
+                       TextColor="Blue"
+                       VerticalOptions="Center"
+                       TextDecorations="Underline"/>
+
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnContactPage"/>
+                </Grid.GestureRecognizers>
+            </Grid>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

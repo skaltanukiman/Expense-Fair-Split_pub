@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Expense_Fair_Split.Views.Archive.ArchiveOutputPage"
+             Shell.BackgroundColor="White">
+    <ScrollView>
+
+        <VerticalStackLayout>
+
+            <VerticalStackLayout IsVisible="{Binding NoCollection}">
+                <Label
+                    Text="表示するコンテンツがありません。"
+                    HorizontalOptions="Center"
+                    Style="{StaticResource NormalTextSize}" />
+            </VerticalStackLayout>
+
+            <Grid HorizontalOptions="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <HorizontalStackLayout Grid.Column="0" Margin="0,0,10,0" IsVisible="{Binding HasValidData}">
+                    <Label Text="■" TextColor="#ccc" />
+                    <Label Text=": "/>
+                    <Label Text="有効"/>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Grid.Column="1" IsVisible="{Binding HasDeletedData}">
+                    <Label Text="■" TextColor="#ffdddd" />
+                    <Label Text=": "/>
+                    <Label Text="削除済み"/>
+                </HorizontalStackLayout>
+            </Grid>
+            
+            <CollectionView ItemsSource="{Binding ArchiveOutputList}" Margin="10,1,10,10">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+
+                        <Frame BackgroundColor="#ccc" CornerRadius="8" Padding="12" Margin="8">
+                            <Frame.Triggers>
+                                <DataTrigger TargetType="Frame" Binding="{Binding DisplayDeleteColor}" Value="True">
+                                    <Setter Property="BackgroundColor" Value="#ffdddd" /> <!-- 削除済みデータの背景色 -->
+                                </DataTrigger>
+                            </Frame.Triggers>
+                            
+                            <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto" RowSpacing="6">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- 日付 -->
+                                <Label Text="日付" Grid.Row="0" Grid.Column="0" FontAttributes="Bold" />
+                                <Label Text="|" Grid.Row="0" Grid.Column="1" TextColor="Gray" Padding="5,0"/>
+                                <Label Text="{Binding BillingDate}" Grid.Row="0" Grid.Column="2" />
+
+                                <!-- 請求者 -->
+                                <Label Text="請求者" Grid.Row="1" Grid.Column="0" FontAttributes="Bold" />
+                                <Label Text="|" Grid.Row="1" Grid.Column="1" TextColor="Gray" Padding="5,0"/>
+                                <Label Text="{Binding FromUser}" Grid.Row="1" Grid.Column="2" />
+
+                                <!-- 受領者 -->
+                                <Label Text="受領者" Grid.Row="2" Grid.Column="0" FontAttributes="Bold" />
+                                <Label Text="|" Grid.Row="2" Grid.Column="1" TextColor="Gray" Padding="5,0"/>
+                                <Label Text="{Binding ToUser}" Grid.Row="2" Grid.Column="2" />
+
+                                <!-- 科目 -->
+                                <Label Text="科目" Grid.Row="3" Grid.Column="0" FontAttributes="Bold" />
+                                <Label Text="|" Grid.Row="3" Grid.Column="1" TextColor="Gray" Padding="5,0"/>
+                                <Label Text="{Binding AccountName}" Grid.Row="3" Grid.Column="2" />
+
+                                <!-- 比率 -->
+                                <Label Text="科目" Grid.Row="4" Grid.Column="0" FontAttributes="Bold" />
+                                <Label Text="|" Grid.Row="4" Grid.Column="1" TextColor="Gray" Padding="5,0"/>
+                                <Label Text="{Binding Ratio}" Grid.Row="4" Grid.Column="2" />
+
+                                <!-- 金額 -->
+                                <Label Text="金額" Grid.Row="5" Grid.Column="0" FontAttributes="Bold" />
+                                <Label Text="|" Grid.Row="5" Grid.Column="1" TextColor="Gray" Padding="5,0"/>
+                                <Label Text="{Binding TotalAmount, StringFormat='¥{0:N0}'}" Grid.Row="5" Grid.Column="2" TextColor="DarkGreen" />
+
+                                <!-- 備考 -->
+                                <Label Text="備考" Grid.Row="6" Grid.Column="0" FontAttributes="Bold" />
+                                <Label Text="|" Grid.Row="6" Grid.Column="1" TextColor="Gray" Padding="5,0"/>
+                                <Label Text="{Binding Note}" Grid.Row="6" Grid.Column="2" />
+
+                            </Grid>
+                        </Frame>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            
+        </VerticalStackLayout>
+    </ScrollView>
+    
+</ContentPage>

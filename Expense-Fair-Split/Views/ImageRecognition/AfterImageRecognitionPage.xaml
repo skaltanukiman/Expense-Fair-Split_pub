@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Expense_Fair_Split.Views.ImageRecognition.AfterImageRecognitionPage"
+             Title="AfterImageRecognitionPage">
+
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout
+                Padding="20,20,20,0"
+                Spacing="25">
+
+                <!-- 商品情報 + 金額 -->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <!-- ヘッダー行（Label） -->
+                    <VerticalStackLayout>
+
+                        <Grid Grid.Row="0" ColumnDefinitions="1*,3*,2*" Margin="0,0,0,10">
+                            <Label
+                                Text="計算"
+                                FontAttributes="Bold"
+                                HorizontalOptions="Center"
+                                Grid.Column="0"/>
+
+                            <Label
+                                Text="商品名"
+                                FontAttributes="Bold"
+                                Grid.Column="1"/>
+
+                            <Label
+                                Text="金額"
+                                FontAttributes="Bold"
+                                Margin="30,0,0,0"
+                                Grid.Column="2"/>
+                        </Grid>
+
+                        <BoxView HeightRequest="1" Color="LightGray" HorizontalOptions="FillAndExpand" />
+
+                    </VerticalStackLayout>
+
+                    <Label
+                        Grid.Row="1"
+                        IsVisible="{Binding ViewObjNotExists}"
+                        Style="{StaticResource SmallTextSize}"
+                        Text="表示するオブジェクトがありません。"
+                        Opacity="0.6"
+                        Margin="0,180,0,0"
+                        HorizontalTextAlignment="Center"/>
+
+                    <!-- メイン -->
+                    <CollectionView Grid.Row="1" ItemsSource="{Binding ImageRecognitionDatas}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+
+                                <VerticalStackLayout Spacing="0">
+
+                                    <Grid Padding="0" ColumnDefinitions="1*,3*,2*">
+                                        <CheckBox IsChecked="{Binding IsTarget}" Grid.Column="0" CheckedChanged="CheckBox_CheckedChanged" VerticalOptions="Center" HorizontalOptions="Center" />
+                                        <Label Text="{Binding Discription}" Grid.Column="1" VerticalOptions="Center" LineBreakMode="TailTruncation" />
+                                        <Label Text="{Binding DisplayAmount}" Grid.Column="2" VerticalOptions="Center" Margin="30,0,0,0" />
+                                    </Grid>
+
+                                    <BoxView HeightRequest="1" Color="LightGray" HorizontalOptions="FillAndExpand" />
+
+                                </VerticalStackLayout>
+
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <VerticalStackLayout
+            Grid.Row="1"
+            Padding="50,20,50,80">
+
+            <HorizontalStackLayout HorizontalOptions="Center" Margin="0,0,0,30">
+                <Label Text="合計:       ¥" Style="{StaticResource LargeTextSize}" />
+                <Label Text="{Binding TotalAmount}" Style="{StaticResource LargeTextSize}" />
+            </HorizontalStackLayout>
+
+            <Button
+                Text="決定"
+                Clicked="Button_Clicked"
+                Style="{StaticResource CommonBtn}"
+                HorizontalOptions="Center" />
+
+        </VerticalStackLayout>
+    </Grid>
+    
+</ContentPage>

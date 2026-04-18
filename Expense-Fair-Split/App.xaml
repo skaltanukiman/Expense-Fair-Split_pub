@@ -1,0 +1,61 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Expense_Fair_Split"
+             x:Class="Expense_Fair_Split.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            
+            <!--FontAwesomeアイコンを追加-->
+            <x:String x:Key="ArrowsRotateIcon">&#xf021;</x:String>
+            <x:String x:Key="CircleExclamationIcon">&#xf06a;</x:String>
+            <x:String x:Key="FilterIcon">&#xf0b0;</x:String>
+            <x:String x:Key="EnvelopeIcon">&#xf0e0;</x:String>
+            <x:String x:Key="HouseIcon">&#xf015;</x:String>
+            <x:String x:Key="ArrowLeftIcon">&#xf060;</x:String>
+
+            <!--追加したアイコンのFontImageSourceを追加-->
+            <FontImageSource
+                x:Key="ArrowsRotateIconImageSource"
+                FontFamily="FontAwesomeSolid"
+                Color="Black"
+                Glyph="{StaticResource ArrowsRotateIcon}" />
+
+            <FontImageSource
+                x:Key="CircleExclamationIconImageSource"
+                FontFamily="FontAwesomeSolid"
+                Color="Black"
+                Glyph="{StaticResource CircleExclamationIcon}" />
+
+            <FontImageSource
+                x:Key="FilterIconImageSource"
+                FontFamily="FontAwesomeSolid"
+                Color="Black"
+                Glyph="{StaticResource FilterIcon}" />
+
+            <FontImageSource
+                x:Key="EnvelopeIconImageSource"
+                FontFamily="FontAwesomeSolid"
+                Color="Black"
+                Glyph="{StaticResource EnvelopeIcon}" />
+
+            <FontImageSource
+                x:Key="HouseIconImageSource"
+                FontFamily="FontAwesomeSolid"
+                Color="Black"
+                Glyph="{StaticResource HouseIcon}" />
+
+            <FontImageSource
+                x:Key="ArrowLeftIconImageSource"
+                FontFamily="FontAwesomeSolid"
+                Color="Black"
+                Glyph="{StaticResource ArrowLeftIcon}" />
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+                <ResourceDictionary Source="Resources/Styles/CustomStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

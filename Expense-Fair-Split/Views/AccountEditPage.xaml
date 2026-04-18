@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
+             x:Class="Expense_Fair_Split.Views.AccountEditPage"
+             Shell.BackgroundColor="White">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="50,50,50,50"
+            Spacing="0">
+
+            <Label
+                Text="{Binding ErrMsg}"
+                FontSize="16"
+                TextColor="Red"
+                IsVisible="{Binding ShowErrMsg}"
+                Margin="0,0,0,30"
+                />
+
+            <Label
+                Text="{Binding ErrMsg2}"
+                FontSize="16"
+                TextColor="Red"
+                IsVisible="{Binding ShowErrMsg2}"
+                Margin="0,0,0,30"
+                />
+
+            <Label
+                Text="勘定"
+                FontSize="20"
+                Margin="5,0,0,0" />
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.3*"/>
+                    <ColumnDefinition Width="0.3*"/>
+                </Grid.ColumnDefinitions>
+
+                <!--左部-->
+                <Entry
+                    Text="{Binding AdditionalAccount}"
+                    FontSize="16"
+                    Placeholder="登録する勘定を入力"
+                    Margin="0,0,0,0"
+                    Grid.Row="0"
+                    Grid.Column="0" />
+
+                <!--右部-->
+                <Button
+                    Command="{Binding AddAccCommand}"
+                    Text="追加" 
+                    Padding="0,0"
+                    FontSize="14"
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    CornerRadius="0"
+                    BackgroundColor="Honeydew"
+                    BorderColor="Black"
+                    BorderWidth="2"
+                    Opacity="0.8"
+                    HeightRequest="30"
+                    Grid.Row="0"
+                    Grid.Column="1"/>
+            </Grid>
+
+            <syncfusion:SfDataGrid
+                ItemsSource="{Binding AccountDataList}"
+                ColumnWidthMode="Auto"
+                GridLinesVisibility="Both"
+                HeaderGridLinesVisibility="Both"
+                SortingMode="Single"
+                SelectionMode="Single"
+                NavigationMode="Cell"
+                LostFocusBehavior="EndEditCurrentCell"
+                CurrentCellEndEdit="OnDataGridCellEndEdit"
+                EditTapAction="OnDoubleTap">
+                <syncfusion:SfDataGrid.DefaultStyle>
+                    <syncfusion:DataGridStyle
+                        HeaderRowBackground="{OnPlatform WinUI=yellow}"
+                        RowBackground="{OnPlatform WinUI=AntiqueWhite}"
+                        AlternateRowBackground="#AFD5FB"
+                        HeaderGridLineStrokeThickness="3"
+                        GridLineStrokeThickness="3"/>
+                </syncfusion:SfDataGrid.DefaultStyle>
+                <syncfusion:SfDataGrid.Columns>
+                    <syncfusion:DataGridTextColumn MappingName="AccId" HeaderText="ID" />
+                    <syncfusion:DataGridTextColumn MappingName="AccName" HeaderText="勘定" AllowEditing="True" />
+                    <syncfusion:DataGridTextColumn MappingName="CreateUser" HeaderText="作成者" />
+                    <syncfusion:DataGridTextColumn MappingName="CreateDate" HeaderText="作成日" Format="yyyy/MM/dd HH:mm:ss" />
+                    <syncfusion:DataGridTextColumn MappingName="UpdateUser" HeaderText="更新者" />
+                    <syncfusion:DataGridTextColumn MappingName="UpdateDate" HeaderText="更新日" Format="yyyy/MM/dd HH:mm:ss" />
+                    <syncfusion:DataGridCheckBoxColumn MappingName="DelFlg" HeaderText="削除" UseBindingValue="True" />
+                </syncfusion:SfDataGrid.Columns>
+            </syncfusion:SfDataGrid>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:localization="clr-namespace:Expense_Fair_Split.Localization"
+             x:Class="Expense_Fair_Split.Views.NewRegistrations.NewRegistrationPage"
+             Title="ユーザー登録">
+    
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="50,150,50,150"
+            Spacing="0">
+
+            <Label
+                Text="{Binding ProcessMsg}"
+                FontSize="14"
+                TextColor="Red"
+                IsVisible="{Binding ShowProcessMsg}"
+                Margin="0,0,0,20"
+                />
+
+            <Label
+                Text="{Binding ErrMsg}"
+                FontSize="14"
+                TextColor="Red"
+                IsVisible="{Binding ShowErrMsg}"
+                Margin="0,0,0,20"
+                />
+
+            <Label 
+                Text="ようこそ！&#xa;あなたのお名前を教えてください。"
+                FontSize="18"
+                HorizontalOptions="Start"
+                Margin="0,0,0,30" />
+
+            <Label 
+                Text="{x:Static localization:XamlText.UserName}"
+                FontSize="20"
+                Margin="0,0,0,0" />
+            <Entry
+                Text="{Binding UserName}"
+                FontSize="20"
+                Placeholder="ハチミツください"
+                Margin="0,0,0,0"/>
+            <Label 
+               Text="{x:Static localization:XamlText.CautionText1}"
+               FontSize="8"
+               Margin="0,0,0,10" />
+
+            <Label 
+               Text="{x:Static localization:XamlText.MailAddress}"
+               FontSize="20"
+               Margin="0,0,0,0" />
+            <Entry
+               Text="{Binding EmailAddress}"
+               FontSize="20"
+               Keyboard="Email"
+               Placeholder="hohoho@gmail.com"
+               Margin="0,0,0,10"/>
+
+            <Label 
+               Text="{x:Static localization:XamlText.PassWord}"
+               FontSize="20"
+               Margin="0,0,0,0" />
+            <Entry
+               Text="{Binding PassWord}"
+               FontSize="20"
+               IsPassword="True"
+               Placeholder="PassWord"
+               Margin="0,0,0,15"/>
+
+            <Button
+               Text="{x:Static localization:XamlText.Registration}" 
+               Clicked="InputCheckAndUserRegister"
+               HorizontalOptions="Center"
+               Padding="60,15"
+               Margin="0,20,0,0"
+               FontSize="16" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

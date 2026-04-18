@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Expense_Fair_Split.Views.BillingDataEntryPage"
+             Title="請求書発行">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="50,0,50,50"
+            Spacing="0">
+            <Label 
+                Text="請求書発行"
+                FontSize="24"
+                HorizontalOptions="Center"
+                Margin="0,50,0,40" />
+
+            <Label
+                Text="{Binding ErrMsg}"
+                FontSize="14"
+                TextColor="Red"
+                IsVisible="{Binding ShowErrMsg}"
+                Margin="0,0,0,20"
+                />
+
+            <Label
+                Text="From"
+                FontSize="20"
+                Margin="0,0,0,10" />
+            <Label 
+                Text="{Binding FromName}"
+                FontSize="20"
+                Margin="0,0,0,15" />
+
+            <Label 
+                Text="To"
+                FontSize="20"
+                Margin="0,0,0,0" />
+            <Picker
+                ItemsSource="{Binding ToPick}"
+                SelectedItem="{Binding ToPickSelectedItem}"
+                SelectedIndex="{Binding ToPickSelectedIndex}"
+                ItemDisplayBinding="{Binding Name}"
+                FontSize="20"
+                Margin="0,0,0,15" />
+            <Label 
+                Text="勘定"
+                FontSize="20"
+                Margin="0,0,0,0" />
+            <Picker
+                ItemsSource="{Binding AccPick}"
+                SelectedItem="{Binding AccPickSelectedItem}"
+                SelectedIndex="{Binding AccPickSelectedIndex}"
+                ItemDisplayBinding="{Binding AccName}"
+                FontSize="20"
+                Margin="0,0,0,15" />
+            <Label 
+                Text="請求割合"
+                FontSize="20"
+                Margin="0,0,0,0" />
+            <Picker
+                ItemsSource="{Binding RatioPick}"
+                SelectedItem="{Binding RatioPickSelectedItem}"
+                SelectedIndex="{Binding RatioPickSelectedIndex}"
+                ItemDisplayBinding="{Binding RatioName}"
+                FontSize="20"
+                Margin="0,0,0,15" />
+
+            <Label 
+                Text="入力モード"
+                FontSize="20"
+                Margin="0,0,0,0" />
+            <Picker
+                ItemsSource="{Binding InputModePick}"
+                SelectedItem="{Binding InputModePickSelectedItem}"
+                SelectedIndex="{Binding InputModePickSelectedIndex}"
+                ItemDisplayBinding="{Binding CalcInputModeDisplayName}"
+                FontSize="20"
+                Margin="0,0,0,15" />
+
+            <Label 
+                Text="個別入力"
+                FontSize="20"
+                IsVisible="{Binding StackCalcIsVisible}"
+                Margin="0,0,0,0" />
+
+            <Grid ColumnDefinitions="*,Auto"
+                  VerticalOptions="Center"
+                  HorizontalOptions="FillAndExpand"
+                  IsVisible="{Binding StackCalcIsVisible}"
+                  Margin="0,0,0,15"
+                  >
+
+                <Entry
+                    Grid.Column="0"
+                    Text="{Binding StackCalcAmount}"
+                    FontSize="20"
+                    Keyboard="Numeric"
+                    Placeholder="整数のみ入力可能です。" />
+
+                <Button
+                    Grid.Column="1"
+                    Command="{Binding StackAmountCommand}"
+                    VerticalOptions="Center"
+                    Text="追加"
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    BackgroundColor="LightBlue"
+                    Opacity="0.9"
+                    BorderColor="Black"
+                    BorderWidth="1"
+                    CornerRadius="0"
+                    Padding="20,0"
+                    HeightRequest="32" />
+
+            </Grid>
+
+            <Label 
+                Text="金額"
+                FontSize="20"
+                Margin="0,0,0,0" />
+            <Entry
+                Text="{Binding TotalAmount}"
+                FontSize="20"
+                Keyboard="Numeric"
+                Placeholder="整数のみ入力可能です。"
+                IsEnabled="{Binding TotalAmountIsEnable}"
+                Margin="0,0,0,15"/>
+            <Label 
+                Text="備考"
+                FontSize="20"
+                Margin="0,0,0,0" />
+            <Entry
+                Text="{Binding Note}"
+                FontSize="20"
+                Placeholder="任意入力です。"/>
+
+            <Button
+                Text="次へ" 
+                Clicked="OnBillingDataConfirm"
+                HorizontalOptions="Center"
+                Padding="50,10"
+                Margin="0,20,0,0"
+                FontSize="16" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

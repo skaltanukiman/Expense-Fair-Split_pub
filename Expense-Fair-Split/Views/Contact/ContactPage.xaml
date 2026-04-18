@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Expense_Fair_Split.Views.Contact.ContactPage"
+             Title="お問い合わせ">
+    <ScrollView>
+
+        <VerticalStackLayout
+            Padding="50,50,50,0"
+            Spacing="25">
+
+            <VerticalStackLayout IsVisible="{Binding ShowMsgArea}">
+                <Label
+                    Text="・ただいま処理実行中です。しばらくお待ちください。"
+                    FontSize="16"
+                    TextColor="Red"
+                    Margin="0,0,0,0"
+                    IsVisible="{Binding ShowProccessMsg}"
+                    />
+
+                <Label
+                    Text="{Binding ErrMsg}"
+                    FontSize="16"
+                    TextColor="Red"
+                    Margin="0,0,0,0"
+                    IsVisible="{Binding ShowErrMsg}"
+                    />
+
+                <Label
+                    Text="・本文の先頭に空白や改行は使えません。"
+                    FontSize="16"
+                    TextColor="Red"
+                    Margin="0,0,0,0"
+                    IsVisible="{Binding ShowRegexMsg}"
+                    />
+
+            </VerticalStackLayout>
+            
+
+            <VerticalStackLayout>
+                <Label 
+                    Text="From"
+                    Style="{StaticResource NormalLabelSize}"
+                    Margin="0,0,0,10"
+                    />
+
+                <Label 
+                    Text="{Binding FromUserName}"
+                    Style="{StaticResource NormalLabelSize}"
+                    />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout>
+                <Label
+                    Text="お問い合わせ内容"
+                    Style="{StaticResource NormalLabelSize}"
+                    />
+
+                <Picker
+                    ItemsSource="{Binding ContactContentPick}"
+                    SelectedItem="{Binding ContactContentSelectedItem}"
+                    SelectedIndex="{Binding ContactContentSelectedIndex}"
+                    ItemDisplayBinding="{Binding Content}"
+                    Style="{StaticResource NormalPickerSize}"
+                    />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout>
+                <Label
+                    Text="※「その他」を選択時、内容を記入してください"
+                    FontSize="14"
+                    />
+
+                <Entry
+                    Text="{Binding OtherText}"
+                    Style="{StaticResource NormalEntrySize}"
+                    IsEnabled="{Binding OtherTextEnable}"
+                    Placeholder="ひとりごつ"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout>
+                <Label
+                    Text="お問い合わせ本文(複数行入力可)"
+                    FontSize="18"
+                    />
+
+                <Editor
+                    Text="{Binding MainText}"
+                    Style="{StaticResource NormalEditorSize}"
+                    Placeholder="ハチミツくれ"
+                    AutoSize="TextChanges"
+                    />
+            </VerticalStackLayout>
+
+            <Button
+                Text="送信"
+                Style="{StaticResource CommonBtn}"                
+                HorizontalOptions="Center"
+                Command="{Binding ContactSendCommand}"
+                />
+
+            <Grid
+                ColumnDefinitions="Auto,Auto"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+
+                <Image Grid.Column="0"
+                   Source="{StaticResource HouseIconImageSource}"
+                   HeightRequest="24"
+                   WidthRequest="24"
+                   VerticalOptions="Center" />
+
+                <Label Grid.Column="1"
+                   Text="戻る"
+                   FontSize="18"
+                   TextColor="Blue"
+                   VerticalOptions="Center"
+                   TextDecorations="Underline"/>
+
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ReturnHomeAsync"/>
+                </Grid.GestureRecognizers>
+
+            </Grid>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+    
+</ContentPage>

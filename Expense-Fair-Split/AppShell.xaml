@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Expense_Fair_Split.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Expense_Fair_Split"
+    Shell.FlyoutBehavior="Disabled"
+    Title="Expense_Fair_Split">
+
+    <TabBar>
+        <ShellContent
+            Title="Home"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="MainPage" />
+        <ShellContent
+            Title="入力"
+            ContentTemplate="{DataTemplate local:Views.BillingDataEntryPage}"
+            Route="BillingDataEntry" />
+        <ShellContent
+            Title="照会"
+            ContentTemplate="{DataTemplate local:Views.BillingDataInquiryPage}"
+            Route="BillingDataInquiry" />
+        <ShellContent
+            Title="マスタ"
+            ContentTemplate="{DataTemplate local:Views.MasterRegisterPage}"
+            Route="MasterRegister" />
+        <ShellContent
+            Title="その他"
+            ContentTemplate="{DataTemplate local:Views.OtherContentsPage}"
+            Route="OtherContents" />
+        <ShellContent
+            Title="Setting"
+            ContentTemplate="{DataTemplate local:SettingPage}"
+            Route="SettingPage" />
+    </TabBar>
+
+</Shell>

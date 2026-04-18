@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Expense_Fair_Split.SettingPage"
+             Title="設定">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="0,0"
+            Spacing="15">
+            <TableView Intent="Settings">
+                <TableRoot>
+                    <TableSection Title="ログイン情報">
+                        <EntryCell Label="ユーザー名:" Text="{Binding LoginUserName}" IsEnabled="False" />
+                        <EntryCell Label="Email:" Text="{Binding LoginUserEmail}" IsEnabled="False" />
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+
+            <Button
+                Text="ログアウト"
+                Command="{Binding LogoutActionCommand}"
+                Padding="20,10"
+                HorizontalOptions="Center"
+                BackgroundColor="DimGray"
+                CornerRadius="5"/>
+        </VerticalStackLayout>
+    </ScrollView>
+    
+</ContentPage>

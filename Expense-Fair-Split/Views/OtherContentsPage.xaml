@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Expense_Fair_Split.Views.OtherContentsPage"
+             Title="その他">
+    <ScrollView>
+
+
+        <VerticalStackLayout
+            Padding="30,280,30,0"
+            Spacing="25">
+
+            <Label
+                 Text="利用したい機能を選択"
+                 FontSize="17"
+                 FontAttributes="Bold"
+                 HorizontalOptions="Center"
+                 Margin="0,0,0,0"/>
+
+            <Button
+                Text="アーカイブ"
+                Clicked="OnArchivePreparationPage"
+                HorizontalOptions="Fill"
+                Padding="0,20"
+                FontSize="16"/>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+</ContentPage>

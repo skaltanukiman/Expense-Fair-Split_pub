@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Expense_Fair_Split.Views.ImageRecognition.BeforeImageRecognitionPage"
+             Title="BeforeImageRecognitionPage">
+
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView Grid.Row="0">
+            
+            <VerticalStackLayout
+                Padding="50,20,50,0"
+                Spacing="25">
+
+                <ImageButton
+                    Source="{StaticResource ArrowLeftIconImageSource}"
+                    Clicked="OnArrowLeftImage_ClickedAsync"
+                    Margin="-30,0,0,0"
+                    WidthRequest="30"
+                    HeightRequest="26"
+                    HorizontalOptions="Start" />
+
+                <Grid RowDefinitions="Auto,Auto" IsVisible="{Binding ProcStatusOnDisplay}">
+                    <Image
+                        Grid.Row="0"
+                        Source="{StaticResource ArrowsRotateIconImageSource}"
+                        Margin="0,0,0,0"
+                        WidthRequest="30"
+                        HeightRequest="26"
+                        HorizontalOptions="Center"
+                        Rotation="{Binding RotateTo}" />
+
+                    <Label
+                        Grid.Row="1"
+                        Text="{Binding ProcMsg}"
+                        HorizontalTextAlignment="Center"/>
+
+                </Grid>
+
+                <VerticalStackLayout IsVisible="{Binding ErrMsgOnDisplay}">
+                    <Label
+                        Text="{Binding ErrMsg}"
+                        Style="{StaticResource ErrMsgLabelNormal}" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout>
+
+                    <Label
+                        Text="レシート認識モード"
+                        Style="{StaticResource NormalLabelSize}"
+                        />
+
+                    <Picker
+                        ItemsSource="{Binding RecognitionModePick}"
+                        SelectedItem="{Binding RecognitionModePickSelectedItem}"
+                        SelectedIndex="{Binding RecognitionModePickSelectedIndex}"
+                        ItemDisplayBinding="{Binding RecognitionModeDisplayName}"
+                        Style="{StaticResource NormalPickerSize}"
+                        />
+
+                </VerticalStackLayout>
+
+                <VerticalStackLayout>
+                    <Label 
+                        Text="出力内容"
+                        Style="{StaticResource NormalLabelSize}"
+                        Margin="0,0,0,10"
+                        />
+
+                    <Label 
+                        Text="{Binding OutputText}"
+                        Style="{StaticResource NormalTextSize}"
+                        />
+
+                </VerticalStackLayout>
+
+                <VerticalStackLayout>
+
+                    <BoxView HeightRequest="1"
+                             Color="Black"
+                             HorizontalOptions="Fill" />
+
+                    <Label 
+                        Text="※あくまで入力補助機能です。&#10;　目視で金額等を確認してください。"
+                        Style="{StaticResource SmallTextSize}"
+                        TextColor="Red"
+                        Margin="0,25,0,0"
+                        />
+
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <VerticalStackLayout
+            Grid.Row="1"
+            Padding="50,0,50,100">
+            
+            <Button
+                Text="カメラ起動"
+                Clicked="CameraActivationButtonAsync"
+                Style="{StaticResource CommonBtn}"
+                HorizontalOptions="Center"
+                IsEnabled="{Binding ButtonIsEnable}"
+                />
+            
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
